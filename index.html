@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼠鼠翻译器</title>
+</head>
+
+<body>
+    <h1>让🐭🐭也能轻松听懂！</h1>
+    <div>
+        <textarea name="a" id="text" cols="50" rows="20">我好想做嘉然小姐的🐶啊。[嘉然_锤头丧气]</textarea>
+    </div>
+    <button onclick="clicked()">翻译成鼠语</button>
+    <button onclick="back()">撤回</button>
+    <script>
+        const textElement = document.getElementById("text")
+        const history = [textElement.value]
+        const clicked = () => {
+            if (history.length === 0 || textElement.value !== history[history.length - 1]) {
+                history.push(textElement.value)
+            }
+            textElement.value = textElement.value.replaceAll(/\p{Unified_Ideograph}(?![^\[]*\])/ug, "吱")
+        }
+        const back = () => {
+            while (history.length > 0 && textElement.value === history[history.length - 1]) {
+                textElement.value = history.pop()
+            }
+            if (history.length > 0) {
+                textElement.value = history[history.length - 1]
+            }
+        }
+    </script>
+</body>
+
+</html>
